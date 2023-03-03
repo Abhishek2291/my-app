@@ -7,7 +7,7 @@ const Header = (props) => {
         <div>{props.name}</div>
         <ul>
           {
-            props.data.map((i) => {
+            props?.data?.map((i) => {
               return <li>{i}</li>
             })
           }
