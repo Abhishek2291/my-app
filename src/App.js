@@ -1,7 +1,6 @@
 import "./App.css";
 import Header from "./Header";
 import Footer from './Footer'
-import Product from './components/Product'
 import {
   Routes,
   Route,
@@ -12,17 +11,13 @@ import Home from "./Pages/Home";
 import Appoinment from "./Pages/Appoinment";
 import Department from "./Pages/Department";
 import Doctors from "./Pages/Doctors";
+import Login from "./Pages/Login";
 
 const App = () => {
-  const username = "Hotel";
-  const data = ["Home", "About", "Contact"];
-  const user = {
-    name: "admin",
-    email: "admin@admin.com",
-  };
 
   return (
     <div className="content">
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />}  />
@@ -30,7 +25,9 @@ const App = () => {
         <Route path="/appoinment" element={<Appoinment />}  />
         <Route path="/department" element={<Department />}  />
         <Route path="/doctors" element={<Doctors />}  />
+        <Route path="/login" element={<Login />}  />
       </Routes>
+      <Footer />
     </div>
   );
 };
