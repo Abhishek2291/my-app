@@ -1,6 +1,4 @@
 import "./App.css";
-import Header from "./Header";
-import Footer from './Footer'
 import {
   Routes,
   Route,
@@ -12,22 +10,21 @@ import Appoinment from "./Pages/Appoinment";
 import Department from "./Pages/Department";
 import Doctors from "./Pages/Doctors";
 import Login from "./Pages/Login";
+import Layout from "./components/Layout";
 
-const App = () => {
+const App = (props) => {
 
   return (
     <div className="content">
-      <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />}  />
-        <Route path="/contact" element={<Contact />}  />
-        <Route path="/appoinment" element={<Appoinment />}  />
-        <Route path="/department" element={<Department />}  />
-        <Route path="/doctors" element={<Doctors />}  />
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/about" element={<Layout><About /></Layout>}  />
+        <Route path="/contact" element={<Layout><Contact /></Layout>}  />
+        <Route path="/appoinment" element={<Layout><Appoinment /></Layout>}  />
+        <Route path="/department" element={<Layout><Department /></Layout>}  />
+        <Route path="/doctors" element={<Layout><Doctors /></Layout>}  />
         <Route path="/login" element={<Login />}  />
       </Routes>
-      <Footer />
     </div>
   );
 };

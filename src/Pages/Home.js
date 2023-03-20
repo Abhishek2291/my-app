@@ -1,13 +1,45 @@
-import React from "react";
+import React, { useEffect , Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
+const facilities = [
+  { icon : 'fas fa-hospital-alt' , title : '24x7 Emergency Available' , des : 'Nullam accumsan, velit et porta consequat, purus leo congue risus' },
+  { icon : 'fas fa-bed' , title : '40+ Bed Facilities' , des : 'Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum' },
+  { icon : 'fas fa-hospital-user' , title : 'Cardiogram Machine' , des : 'Donec lacinia finibus tortor. Curabitur luctus eleifend odio.' },
+  { icon : 'fas fa-dna' , title : 'X-ray and Sonography' , des : 'Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis.' },
+  { icon : 'fas fa-wheelchair' , title : 'Semi Special, Special and Delux Room Available' , des : 'Etiam in massa eu neque euismod consectetur.' },
+  { icon : 'fas fa-notes-medical' , title : 'Medical' , des : 'Morbi vulputate, tortor nec pellentesque molestie' },
+]
+
 const Home = () => {
+  const [title, settitle] = React.useState("Welcome to City");
+  const [list, setlist] = React.useState([])
+
+  useEffect(() => {
+    console.info("component++ mounted");
+  }, []);
+
+  useEffect(() => {
+    console.info("component++ updated , title changed");
+  }, [title]);
+
+  const onClickHandler = () => {
+    setlist(facilities)
+  };
+
+  const data = [
+    { count: 23, title: "Doctors", icon: "fas fa-user-md" },
+    { count: 18, title: "Departments", icon: "far fa-hospital" },
+    { count: 980, title: "Patients", icon: "fas fa-heartbeat" },
+    { count: 12, title: "Awards", icon: "fas fa-award" },
+  ];
+
   return (
     <div>
       <section id="hero" className="d-flex align-items-center">
         <Container>
           <h1>
-            Welcome to City <br />
+            {title}
+            <br />
             Multispeciality Hospital
           </h1>
           <h2>
@@ -21,34 +53,20 @@ const Home = () => {
         <section id="counts" className="counts">
           <div className="container">
             <Row>
-              <Col md={6} lg={3}>
-                <div className="count-box">
-                  <i className="fas fa-user-md" />
-                  <span>23</span>
-                  <p>Doctors</p>
-                </div>
-              </Col>
-              <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
-                <div className="count-box">
-                  <i className="far fa-hospital" />
-                  <span>18</span>
-                  <p>Departments</p>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div className="count-box">
-                  <i className="fas fa-heartbeat" />
-                  <span>980</span>
-                  <p>Patients</p>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div className="count-box">
-                  <i className="fas fa-award" />
-                  <span>12</span>
-                  <p>Awards</p>
-                </div>
-              </div>
+              {data.map((i,index) => {
+                return (
+                  <Fragment>
+                    <span>Test</span>
+                  <Col key={index} md={6} lg={3}>
+                    <div className="count-box">
+                      <i className={i.icon} />
+                      <span>{i.count}</span>
+                      <p>{i.title}</p>
+                    </div>
+                  </Col>
+                  </Fragment>
+                );
+              })}
             </Row>
           </div>
         </section>
@@ -64,85 +82,25 @@ const Home = () => {
                 lectus.
               </p>
             </div>
+              { list.length < 1 && <button className="btn btn-danger " onClick={onClickHandler}>Load Facilities...</button>}
             <div className="row">
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-hospital-alt" />
+              {
+                list.map((i) => {
+                  return <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div className="icon-box">
+                    <div className="icon">
+                      <i className={i.icon} />
+                    </div>
+                    <h4>
+                      <a href>{i.title}</a>
+                    </h4>
+                    <p>
+                      {i.des}
+                    </p>
                   </div>
-                  <h4>
-                    <a href>24x7 Emergency Available</a>
-                  </h4>
-                  <p>
-                    Nullam accumsan, velit et porta consequat, purus leo congue
-                    risus
-                  </p>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-bed" />
-                  </div>
-                  <h4>
-                    <a href>40+ Bed Facilities</a>
-                  </h4>
-                  <p>
-                    Pellentesque id felis elit. Pellentesque blandit sem a nisi
-                    dictum
-                  </p>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-hospital-user" />
-                  </div>
-                  <h4>
-                    <a href>Cardiogram Machine</a>
-                  </h4>
-                  <p>
-                    Donec lacinia finibus tortor. Curabitur luctus eleifend
-                    odio.
-                  </p>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-dna" />
-                  </div>
-                  <h4>
-                    <a href>X-ray and Sonography</a>
-                  </h4>
-                  <p>
-                    Aliquam auctor felis ut sem elementum, ac rutrum turpis
-                    venenatis.
-                  </p>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-wheelchair" />
-                  </div>
-                  <h4>
-                    <a href>Semi Special, Special and Delux Room Available</a>
-                  </h4>
-                  <p>Etiam in massa eu neque euismod consectetur.</p>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div className="icon-box">
-                  <div className="icon">
-                    <i className="fas fa-notes-medical" />
-                  </div>
-                  <h4>
-                    <a href>Medical</a>
-                  </h4>
-                  <p>Morbi vulputate, tortor nec pellentesque molestie</p>
-                </div>
-              </div>
+                })
+              }
             </div>
           </div>
         </section>
@@ -408,6 +366,5 @@ const Home = () => {
     </div>
   );
 };
-
 
 export default Home;
