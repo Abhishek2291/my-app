@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field , ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const Contact = () => {
@@ -26,7 +26,7 @@ const Contact = () => {
     name: Yup.string()
       .min(2, "Name is too short!")
       .required("Name is required  "),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email").matches(/@[^.]*\./,"Invalid email address").required("Email is required"),
   });
 
   return (
@@ -104,9 +104,7 @@ const Contact = () => {
                             id="name"
                             placeholder="Your Name"
                           />
-                          {errors.name && touched.name ? (
-                            <div className="text-danger">{errors.name}</div>
-                          ) : null}
+                          <ErrorMessage component="span" className="text-danger" name="name" />
                         </div>
                         <div className="col-md-6 form-group mt-3 mt-md-0">
                           <Field
@@ -116,9 +114,7 @@ const Contact = () => {
                             id="email"
                             placeholder="Your Email"
                           />
-                          {errors.email && touched.email ? (
-                            <div>{errors.email}</div>
-                          ) : null}
+                            <ErrorMessage component="span" className="text-danger" name="email" />
                         </div>
                       </div>
                       <div className="form-group mt-3">

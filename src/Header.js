@@ -1,7 +1,22 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = (props) => {
+  const navigate = useNavigate()
+
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.info("user++ ",user)
+
+
+  const onClickLogin = () => {
+    navigate('/login')
+  }
+
+  const onClickLogout = () => {
+    localStorage.removeItem('user')
+    navigate('/')
+  }
+
   return (
     <div className="main-header">
     <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -56,8 +71,8 @@ const Header = (props) => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link scrollto " to="/about">
-                About
+              <Link className="nav-link scrollto " to="/medicines">
+                Medicines
               </Link>
             </li>
             <li>
@@ -75,9 +90,12 @@ const Header = (props) => {
           <span className="d-none d-md-inline">Make an</span>
           Appointment
         </Link>
-        <Link to="/login" className="appointment-btn scrollto">
+        {!user && <button onClick={onClickLogin} className="appointment-btn scrollto">
           <span className="d-none d-md-inline">Login/ Signup</span>
-        </Link>
+        </button>}
+        {user && <button onClick={onClickLogout} className="appointment-btn scrollto">
+          <span className="d-none d-md-inline">Logout</span>
+        </button>}
       </div>
     </header>
   </div>

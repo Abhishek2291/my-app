@@ -73,3 +73,17 @@ td {
   padding: 15px;
   font-weight: bold;
 }
+
+.appointment-btn {
+  margin-left: 25px;
+  background: #FF6337;
+  color: #fff;
+  border-radius: 50px;
+  padding: 8px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 14px;
+  display: inline-block;
+  outline: none !important;
+  border: none !important;
+}
