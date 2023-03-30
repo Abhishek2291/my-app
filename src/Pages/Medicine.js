@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { useNavigate } from "react-router-dom";
 import AddMedicneModal from "../components/AddMedicneModal";
 
 const Medicine = () => {
-
+  const navigate = useNavigate()
   const [show, setShow] = useState(false);
+  const [data, setdata] = useState(JSON.parse(localStorage.getItem("medicine")) || [])
 
   const onClickAddMedicine = () => {
-    setShow(true)
+    setShow(true);
   };
 
+  const onClickDelete = (id) => {
+    const filter = data.filter((i) => id !== i.id)
+    localStorage.setItem('medicine',JSON.stringify(filter))
+    setdata(filter)
+  }
+
+  const onClickEdit = (id) => {
+    navigate(`/update-medicine`)
+  }
+
+  const getData = () => {
+    const res = (JSON.parse(localStorage.getItem("medicine")) || [])
+    setdata(res)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [show])
+  
+  
   return (
     <>
       <AddMedicneModal show={show} setShow={setShow} />
@@ -23,29 +45,26 @@ const Medicine = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colSpan={2}>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {data.map((i) => {
+                return (
+                  <tr>
+                    <td>{i.id}</td>
+                    <td>{i.name}</td>
+                    <td>{i.price}</td>
+                    <td>{i.quantity}</td>
+                    <td><Button onClick={() => onClickEdit(i.id)} variant="success">Edit</Button></td>
+                    <td><Button onClick={() => onClickDelete(i.id)} variant="danger">Delete</Button></td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>

@@ -10,12 +10,22 @@ const AddMedicneModal = ({ show, setShow }) => {
     event.preventDefault();
 
     const values = {
+        id : new Date().getTime(),
         name : event.target.name.value,
         price : event.target.price.value,
         quantity : event.target.quantity.value 
     }
 
-    console.info("form submitted++",values);
+    const data = JSON.parse(localStorage.getItem('medicine'));
+    if(data){
+      data.unshift(values)
+      localStorage.setItem('medicine',JSON.stringify(data))
+    }
+    else{
+      localStorage.setItem('medicine',JSON.stringify([values]))
+    }
+
+    setShow(false)
   };
 
   return (

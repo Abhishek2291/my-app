@@ -12,6 +12,7 @@ import Doctors from "./Pages/Doctors";
 import Login from "./Pages/Login";
 import Layout from "./components/Layout";
 import Medicine from "./Pages/Medicine";
+import UpdateMedicine from "./Pages/UpdateMedicine";
 
 const App = (props) => {
 
@@ -21,6 +22,7 @@ const App = (props) => {
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/about" element={<Layout><About /></Layout>}  />
         <Route path="/medicines" element={<Layout><Medicine /></Layout>}  />
+        <Route path="/update-medicine" element={<Layout><UpdateMedicine /></Layout>}  />
         <Route path="/contact" element={<Layout><Contact /></Layout>}  />
         <Route path="/appoinment" element={<Layout><Appoinment /></Layout>}  />
         <Route path="/department" element={<Layout><Department /></Layout>}  />
